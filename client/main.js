@@ -1,5 +1,7 @@
 const form = document.getElementById("messageForm");
 
+// Here is how we fetch and display our db data on our client page:
+
 async function fetchAndRenderRamen() {
   const response = await fetch("https://renderdemo-server.onrender.com/ramen");
   const ramenList = await response.json();
@@ -15,6 +17,7 @@ async function fetchAndRenderRamen() {
 
 fetchAndRenderRamen();
 
+//Here is how we pass our formData to our server:
 form.addEventListener("submit", submitButton);
 
 async function submitButton(event) {

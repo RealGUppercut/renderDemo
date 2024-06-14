@@ -1,43 +1,13 @@
-import express from "express";
-import cors from "cors";
-import pg from "pg";
-import dotenv from "dotenv";
-
-const app = express();
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST"],
-    credentials: true,
-  })
-);
-app.use(express.json());
-dotenv.config();
-
-const dbConnectionstring = process.env.DATABASE_URL;
-
-export const db = new pg.Pool({
-  connectionString: dbConnectionstring,
-});
-
-const port = 8080;
-app.listen(port, () => {
-  console.log(`Your server is running on port: ${port}`);
-});
-
-app.get("/", (req, res) => {
-  res.json({ message: "There are no bad root route jokes, only bad taste." });
-});
-
-app.get("/ramen", async (req, res) => {
-  const value = 240;
-  const result = await db.query(
-    `
-     SELECT * FROM ramen WHERE Time_To_Cook < $1 AND price < $2`,
-    [value, 2]
-  );
-  res.json(result.rows);
-});
+// Youll need to express, render, cors and dotenv
+// Your app will need to use express.
+// Your app will need to use cors.
+// Your app will need to know to use express and json.
+// You'll need to configure cors.
+// You'll need to declare your dbConnectionString
+// You'll need to export your db variable (it will use pg pool)
+// You'll need to declare and listen from your port.
+// Sort out your root route.
+// Create your get endpoint.
 
 app.post("/ramen", async (req, res) => {
   const { Flavour, Price, Spiciness, Time_To_Cook } = req.body;
