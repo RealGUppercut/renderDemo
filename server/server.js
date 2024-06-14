@@ -4,6 +4,16 @@ import pg from "pg";
 import dotenv from "dotenv";
 
 const app = express();
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://renderdemo-client.onrender.com",
+      "https://renderdemo-client.onrender.com",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cors());
 dotenv.config();
