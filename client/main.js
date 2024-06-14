@@ -1,7 +1,7 @@
 const form = document.getElementById("messageForm");
 
 async function fetchAndRenderRamen() {
-  const response = await fetch("https://renderdemo-3ohl.onrender.com/ramen");
+  const response = await fetch("https://renderdemo-server.onrender.com/ramen");
   const ramenList = await response.json();
   const ramenListDiv = document.getElementById("ramenList");
   ramenListDiv.innerHTML = "";
@@ -22,7 +22,7 @@ function submitButton(event) {
 
   const formData = new FormData(form);
   const formValues = Object.fromEntries(formData);
-  fetch("https://renderdemo-3ohl.onrender.com/ramen", {
+  fetch("https://renderdemo-server.onrender.com/ramen", {
     method: "GET",
     headers: {
       "content-type": "application/json",
