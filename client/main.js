@@ -17,17 +17,33 @@ fetchAndRenderRamen();
 
 form.addEventListener("submit", submitButton);
 
-function submitButton(event) {
+async function submitButton(event) {
   event.preventDefault();
 
   const formData = new FormData(form);
   const formValues = Object.fromEntries(formData);
-  fetch("https://renderdemo-server.onrender.com/ramen", {
-    method: "GET",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(formValues),
-  });
-  console.log(event);
+
+  try {
+    const response = await fetch(
+      "https://renderdemo-server.onrender.com/ramen",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.success) {
+      console.log("DATA SAVED - ALL IS WELL");
+      fetchAndRenderRamen();
+    } else {
+      console.log("NOOOOOOOOOO DO NOT WANT");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
