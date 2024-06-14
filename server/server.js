@@ -38,3 +38,18 @@ app.get("/ramen", async (req, res) => {
   );
   res.json(result.rows);
 });
+
+app.post("/ramen", async (req, res) => {
+  const { Flavour, Price, Spiciness, Time_To_Cook } = req.body;
+
+  try {
+    await db.query(
+      `INSERT into ramen (Flavour, Price, Spiciness, Time_To_Cook) VALUES ($1, $2, $3, $4)`,
+      [Flavour, Price, Spiciness, Time_To_Cook]
+    );
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("NOOOOOOOO NO INSERT FOR YOU", error);
+    res.status(500).json({ success: false });
+  }
+});
