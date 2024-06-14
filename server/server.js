@@ -6,16 +6,12 @@ import dotenv from "dotenv";
 const app = express();
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://renderdemo-client.onrender.com",
-      "https://renderdemo-client.onrender.com",
-    ],
+    origin: "*",
+    methods: ["GET", "POST"],
     credentials: true,
   })
 );
 app.use(express.json());
-app.use(cors());
 dotenv.config();
 
 const dbConnectionstring = process.env.DATABASE_URL;
